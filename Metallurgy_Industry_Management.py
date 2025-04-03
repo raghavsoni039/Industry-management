@@ -378,8 +378,9 @@ def display_info():
                 print('WRONG INPUT TRY AGAIN')
                 continue
         elif y==3:
-            mc=mydb.cursor
-            mc.execute("SELECT * FROM financial_info")
+            mc=mydb.cursor()
+            query='select * from financial_info'
+            mc.execute(query)
             for i in mc:
                 print(i)
             if mc.rowcount==0:
