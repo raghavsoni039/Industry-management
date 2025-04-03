@@ -4,21 +4,21 @@ mydb = mysql.connector.connect (host="localhost",
                                 passwd="R@ghav_2005")
 print(mydb)
 mc=mydb.cursor()
-mc.execute("CREATE DATABASE METALLURGY_INDUSTRY_MANAGEMENT")
+mc.execute("CREATE DATABASE IF NOT EXISTS METALLURGY_INDUSTRY_MANAGEMENT")
 mc.execute("USE METALLURGY_INDUSTRY_MANAGEMENT")
 mc.execute("CREATE TABLE IF NOT EXISTS ORE ( SRNO INT PRIMARY KEY,\
 ORENAME VARCHAR(20),ORECHEMICALFORMULA VARCHAR(20),METAL VARCHAR(20),PRICE_perqntl INT )")
 mc.execute("CREATE TABLE IF NOT EXISTS WORKERS( W_ID INT PRIMARY KEY,W_NAME VARCHAR(20),CONTACTNO INT,DEPARTMENT VARCHAR(20))")
 mc.execute("CREATE TABLE IF NOT EXISTS FINANCIAL_INFO( SRNO INT PRIMARY KEY, SALARY INT,W_ID INT REFERENCES WORKER (W_ID))")
-mc.execute("INSERT INTO ORE VALUES(1,'TINSTONE','SNO2','TIN',15000)") 
-mc.execute("INSERT INTO ORE VALUES(2,'ZINCITE','ZnO','ZINC',12000)")
-mc.execute("INSERT INTO ORE VALUES(3,'NITRATE ORE','NANO3','SODIUM',20000)")
-mc.execute("INSERT INTO WORKERS VALUES('101','RAMU',985003695,'REFINING'),('102','SHAMJI',800555555,'SMELTING')")
-mc.execute("INSERT INTO WORKERS VALUES('103','RAMJI',800555455,'SMELTING'),('104','RAMAVTAR',958552100,'GRINDING')")
-mc.execute("INSERT INTO WORKERS VALUES('105','NARENDRA',800544555,'LEACHING')")
-mc.execute("INSERT INTO FINANCIAL_INFO VALUES(1,20000,103),(2,25000,102)")
-mc.execute("INSERT INTO FINANCIAL_INFO VALUES(3,24000,101),(4,26000,104)")
-mc.execute("INSERT INTO FINANCIAL_INFO VALUES(5,28000,105)")
+mc.execute("INSERT IGNORE INTO ORE VALUES(1,'TINSTONE','SNO2','TIN',15000)") 
+mc.execute("INSERT IGNORE INTO ORE VALUES(2,'ZINCITE','ZnO','ZINC',12000)")
+mc.execute("INSERT IGNORE INTO ORE VALUES(3,'NITRATE ORE','NANO3','SODIUM',20000)")
+mc.execute("INSERT IGNORE INTO WORKERS VALUES('101','RAMU',985003695,'REFINING'),('102','SHAMJI',800555555,'SMELTING')")
+mc.execute("INSERT IGNORE INTO WORKERS VALUES('103','RAMJI',800555455,'SMELTING'),('104','RAMAVTAR',958552100,'GRINDING')")
+mc.execute("INSERT IGNORE INTO WORKERS VALUES('105','NARENDRA',800544555,'LEACHING')")
+mc.execute("INSERT IGNORE INTO FINANCIAL_INFO VALUES(1,20000,103),(2,25000,102)")
+mc.execute("INSERT IGNORE INTO FINANCIAL_INFO VALUES(3,24000,101),(4,26000,104)")
+mc.execute("INSERT IGNORE INTO FINANCIAL_INFO VALUES(5,28000,105)")
 mydb.commit()
 for i in mc:
     print(i)
@@ -48,7 +48,6 @@ def add_ore():
             break
         else:
             print("Wrong input")
-
 def delete_ore():
     while True:
         mc=mydb.cursor()
@@ -65,8 +64,6 @@ def delete_ore():
             continue
         else:
             break
-        
-
 def update_ore():
     while True:
         mc=mydb.cursor()
@@ -155,8 +152,6 @@ def display_ore():
             break
         else:
             print("Wrong input")
-
-
 def add_worker():
     while True:
         mc=mydb.cursor()
@@ -178,7 +173,6 @@ def add_worker():
         x=int(input('Enter 0 to exit or any other number to continue adding records=  '))
         if x==0:
             break
-
 def delete_worker():
     while True:
         mc=mydb.cursor()
@@ -197,7 +191,6 @@ def delete_worker():
             break
         else:
             print("Wrong input")
-
 def update_worker():
     while True:
         mc=mydb.cursor()
@@ -237,7 +230,6 @@ def update_worker():
             break
         else:
             print("Wrong input")
-
 def display_workers():
     while True:
         mc=mydb.cursor()
@@ -293,7 +285,6 @@ def display_workers():
             break
         else:
             print("Wrong input")
-      
 def add_info():
     while True:
         mc=mydb.cursor()
@@ -334,7 +325,6 @@ def delete_info():
             break
         else:
             print("Wrong input")
-
 def update_info():
     while True:
         mc=mydb.cursor()
@@ -362,7 +352,6 @@ def update_info():
             break
         else:
             print("Wrong input")
-
 def display_info():
     while True:
         mc=mydb.cursor
@@ -430,7 +419,6 @@ def ORE_MENU():
             MAIN_MENU()
         else :
             print("-----WRONG INPUT----")
-
 def WORKERS_MENU():
     print('***********************METALLURGY INDUSTRY***********************')
     print('-----------------------------WELCOME-----------------------------')
@@ -459,8 +447,6 @@ def WORKERS_MENU():
 def FINANCIAL_MENU():
     print('***********************METALLURGY INDUSTRY***********************')
     print('-----------------------------WELCOME-----------------------------')
-    
-   
     while True:
         print('WHICH FUNCTION DO YOU WISH TO PERFORM\n>>1-ADD RECORDS\n>>2-DELETE RECORDS\n>>3-UPDATE RECORDS\n>>4-DISPLAY RECORDS\n>>5-EXIT TO MAIN MENU')
         x=int(input('ENTER CHOICE = '))
@@ -483,7 +469,6 @@ def FINANCIAL_MENU():
             MAIN_MENU()
         else :
             print("-----WRONG INPUT----")
-
 def MAIN_MENU():
     print('***********************METALLURGY INDUSTRY***********************')
     print('-----------------------------WELCOME-----------------------------')
@@ -500,6 +485,4 @@ def MAIN_MENU():
             break
         else:
             print('xx--------------------------------------------WRONG INPUT-------------------------------xx')
-    
 MAIN_MENU()
-       
